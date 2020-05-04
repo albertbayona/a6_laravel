@@ -5,12 +5,17 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use App\Role;
 class User extends Authenticatable
 {
     use Notifiable;
 
     protected $table = "users";
+    //This set the id rol default user in case of change in database but laravel/php doesn't allows it
+    //  Role::select("id")->where('Rol', "user")->first()->id
+    protected $attributes = [
+        'rol_id' =>"2"
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -37,9 +42,44 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+
     ];
 
-    public function propietats(){
-     return $this->hasMany("App\Propietat");
+    public function property(){
+        return $this->hasMany("App\Property");
     }
+    public function rol(){
+        return $this->belongsTo("App\Role");
+    }
+
+    public function authorizeRoles($roles)
+    {
+        if ($this->hasAnyRole($roles)) {
+            return true;
+        }
+        abort(401, 'Non authorized action.');
+    }
+    public function hasAnyRole($roles)
+    {
+        if (is_array($roles)) {
+            foreach ($roles as $role) {
+                if ($this->hasRole($role)) {
+                    return true;
+                }
+            }
+        } else {
+            if ($this->hasRole($roles)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public function hasRole($role)
+    {
+        if ($this->rol()->where('rol', $role)->first()) {
+            return true;
+        }
+        return false;
+    }
+
 }

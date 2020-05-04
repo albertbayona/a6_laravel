@@ -3,10 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
-class Propietat extends Model
+
+/**
+ * Post
+ *La siguiente linea se pone solo para que no aparezca en el id como que esta mal
+ * @mixin Builder
+ */
+
+class Publication extends Model
 {
-    protected $table='ofertes';
+    protected $table='propietats';
     protected $fillable=['titol','disponibilitat','apartment_id'];
 
     protected $primaryKey = 'id';//por defecto coge ID y que es un numero autoincremental
@@ -18,7 +26,7 @@ class Propietat extends Model
 //    const CREATED_AT = 'creation_date'; //si hemos cambiado el nombre de la columna
 //    const UPDATED_AT = 'last_update'; //si hemos cambiado el nombre de la columna
 
-    public function propietat(){
-        return $this->belongsTo('App\Propietat');
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 }

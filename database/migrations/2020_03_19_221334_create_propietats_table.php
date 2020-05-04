@@ -18,9 +18,7 @@ class CreatePropietatsTable extends Migration
             $table->string('title');
             $table->string('lloc');
             $table->integer('metres2');
-            $table->timestamps();
-            //un apartament només tindrà un propietari
-            $table->integer('user_id');
+            $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

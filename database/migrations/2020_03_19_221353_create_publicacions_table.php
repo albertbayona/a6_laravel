@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePublicaciosTable extends Migration
+class CreatePublicacionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,9 +17,9 @@ class CreatePublicaciosTable extends Migration
             $table->id();
             $table->string('titol');
             $table->string('disponibilitat');
-            $table->timestamps();
-            $table->integer('propietat_id')->unique();
+            $table->bigInteger('propietat_id')->unique()->unsigned();
             $table->foreign('propietat_id')->references('id')->on('propietats');
+            $table->timestamps();
         });
     }
 

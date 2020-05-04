@@ -18,6 +18,12 @@ class CreateRolesTable extends Migration
             $table->string('Rol');
             $table->timestamps();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->bigInteger('rol_id')->unsigned();
+            $table->foreign('rol_id')->references('id')->on('roles');
+
+        });
     }
 
     /**
@@ -27,6 +33,11 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('users_rol_id_foreign');
+            $table->dropColumn('rol_id');
+        });
         Schema::dropIfExists('roles');
+
     }
 }
