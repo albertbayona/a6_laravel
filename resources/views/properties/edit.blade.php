@@ -4,7 +4,7 @@
     <div class="col-lg-12">
 
         <h1 class="my-4">Property edit</h1>
-        <form action="{{route('properties.update',$property->id)}}" method="POST">
+        <form action="{{route('properties.update',$property->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             Title
