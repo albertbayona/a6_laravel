@@ -46,7 +46,7 @@ class PublicationController extends Controller
                 'propietat_id'=>$request->propietat_id,
             ]);
 
-            return redirect()->route('properties.index');
+            return redirect()->route('publications.index');
         }
     }
 
@@ -69,7 +69,10 @@ class PublicationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $publication=Publication::find($id);
+        //No me guta la idea de que puedan cambiar el piso de la publicacion lo demas OK
+
+        return view('publications.edit',compact('publication'));
     }
 
     /**
@@ -81,7 +84,12 @@ class PublicationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $publication=Publication::find($id);
+        $publication->update(['titol'=>$request->titol,
+            'disponibilitat'=>$request->disponibilitat,
+        ]);
+
+        return redirect()->route('publications.index');
     }
 
     /**
@@ -92,6 +100,7 @@ class PublicationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        publication::destroy($id);
+        return redirect()->route('publications.index');
     }
 }

@@ -21,7 +21,7 @@ class Property extends Model
         'title', 'lloc', 'metres2','user_id'
     ];
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User',"user_id");
     }
     public function publication(){
         $this->hasOne('App\Publication');

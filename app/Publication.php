@@ -27,6 +27,6 @@ class Publication extends Model
 //    const UPDATED_AT = 'last_update'; //si hemos cambiado el nombre de la columna
 
     public function property(){
-        return $this->belongsTo('App\Property', 'id');
+        return $this->belongsTo('App\Property', 'propietat_id');
     }
 }

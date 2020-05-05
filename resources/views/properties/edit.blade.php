@@ -21,6 +21,7 @@
             @foreach($users as $user)
                     <option value="{{$user->id}}">{{$user->email}}</option>
             @endforeach
+            </select>
             <br/>
             <input type="submit" class="btn btn-primary" value="Save">
             <br/>

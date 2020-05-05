@@ -22,7 +22,7 @@
                 <tr>
                     <td>{{$publication->titol}}</td>
                     <td>{{$publication->disponibilitat}}</td>
-                    <td>{{$publication->title}}</td>
+                    <td>{{$publication->property->title}}</td>
                 @if (auth::user()->hasAnyRole("user"))
                     <td><a class="btn btn-primary" href="{{route('publications.edit',$publication->id)}}">Edit</a></td>
                 @endif
