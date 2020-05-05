@@ -17,19 +17,19 @@
                 <th></th>
             </tr>
             @foreach($properties as $property)
-                <tr>
-                    <td>{{$property->title}}</td>
-                    <td>{{$property->lloc}}</td>
-                    <td>{{$property->metres2}}</td>
-                    <td><a class="btn btn-primary" href="{{route('properties.edit',$property->id)}}">Edit</a></td>
-                    <td>
-                        <form action="{{ route('properties.destroy', $property->id) }}" method="post">
-                            <input class="btn btn-danger" type="submit" value="Delete" />
-                            @method('delete')
-                            @csrf
-                        </form>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{$property->title}}</td>
+                <td>{{$property->lloc}}</td>
+                <td>{{$property->metres2}}</td>
+                <td><a class="btn btn-primary" href="{{route('properties.edit',$property->id)}}">Edit</a></td>
+                <td>
+                    <form action="{{ route('properties.destroy', $property->id) }}" method="post">
+                        <input class="btn btn-danger" type="submit" value="Delete" />
+                        @method('delete')
+                        @csrf
+                    </form>
+                </td>
+            </tr>
             @endforeach
 
             </thead>
