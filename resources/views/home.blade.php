@@ -45,40 +45,20 @@
 
     <!-- Marketing Icons Section -->
     <div class="row">
+        @foreach($publications as $publication)
         <div class="col-lg-4 mb-4">
             <div class="card h-100">
-                <h4 class="card-header">Card Title</h4>
+                <h4 class="card-header">{{$publication->titol}}</h4>
                 <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+                    <p class="card-text">Metres quadrats: {{$publication->property->metres2}}</p>
+                    <p class="card-text">Lloc:{{$publication->property->lloc}}</p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Learn More</a>
+                    <a href="{{route("publications.show",$publication->id)}}" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 mb-4">
-            <div class="card h-100">
-                <h4 class="card-header">Card Title</h4>
-                <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Learn More</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-            <div class="card h-100">
-                <h4 class="card-header">Card Title</h4>
-                <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </div>
+        @endforeach
     <!-- /.row -->
 
     <!-- Portfolio Section -->

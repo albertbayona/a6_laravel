@@ -58,7 +58,7 @@ class PublicationController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('publications.show');
     }
 
     /**
