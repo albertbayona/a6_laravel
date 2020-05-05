@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Property;
+use App\Publication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PublicationController extends Controller
 {
@@ -13,7 +16,8 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        //
+        $publications= Publication::all();
+        return view('publications.index',compact('publications'));
     }
 
     /**
@@ -23,7 +27,9 @@ class PublicationController extends Controller
      */
     public function create()
     {
-        //
+
+        $properties = Property::where("user_id",auth::user()->id)->get();
+        return view("publications.create",compact('properties'));
     }
 
     /**
@@ -34,7 +40,14 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->propietat_id!=="---"){
+            Publication::create(['titol'=>$request->titol,
+                'disponibilitat'=>$request->disponibilitat,
+                'propietat_id'=>$request->propietat_id,
+            ]);
+
+            return redirect()->route('properties.index');
+        }
     }
 
     /**

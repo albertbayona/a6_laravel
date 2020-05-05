@@ -15,7 +15,7 @@ use Illuminate\Database\Query\Builder;
 class Publication extends Model
 {
     protected $table = 'publicacions';
-    protected $fillable=['titol','disponibilitat','apartment_id'];
+    protected $fillable=['titol','disponibilitat','propietat_id'];
 
     protected $primaryKey = 'id';//por defecto coge ID y que es un numero autoincremental
 //    public $incrementing = false; //si no queremos que sea autoincremental
@@ -26,7 +26,7 @@ class Publication extends Model
 //    const CREATED_AT = 'creation_date'; //si hemos cambiado el nombre de la columna
 //    const UPDATED_AT = 'last_update'; //si hemos cambiado el nombre de la columna
 
-    public function user(){
-        return $this->belongsTo('App\User');
+    public function property(){
+        return $this->belongsTo('App\Property', 'id');
     }
 }
