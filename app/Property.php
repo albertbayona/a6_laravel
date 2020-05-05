@@ -14,7 +14,8 @@ use Illuminate\Database\Query\Builder;
 
 class Property extends Model
 {
-    protected $table = 'publicacions';
+    protected $table='propietats';
+
 
     protected $fillable = [
         'title', 'lloc', 'metres2','user_id'

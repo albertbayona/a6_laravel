@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Property;
-
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class PropertyController extends Controller
+class UserController extends Controller
 {
     function __construct()
     {
-//        $this->middleware(['auth','role:admin']);
-        $this->middleware(['auth']);
+        $this->middleware(['auth','role:admin']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,13 +20,9 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        if(auth::user()->hasAnyRole("admin")){
-            $properties= Property::all();
-        }else{
-            $properties = Property::where("user_id",auth::user()->id)->get();
-        }
+        $users= User::all();
+        return view('users.index',compact('users'));
 
-        return view('properties.index',compact('properties'));
     }
 
     /**
@@ -39,8 +32,8 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
-        return view('properties.create');
+        $roles=Role::all();
+        return view('users.create',compact('roles'));
     }
 
     /**
@@ -51,14 +44,13 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        Property::create(['title'=>$request->title,
-            'lloc'=>$request->lloc,
-            'metres2'=>$request->metres2,
-            'user_id'=>auth::user()->id
+        User::create(['name'=>$request->name,
+            'email'=>$request->email,
+            'rol_id'=>$request->role,
+            'password'=>bcrypt($request->password)
         ]);
 
-        return redirect()->route('properties.index');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -80,10 +72,10 @@ class PropertyController extends Controller
      */
     public function edit($id)
     {
-        $property=Property::find($id);
-        $users=User::where("rol_id",Role::where("Rol","user")->first()->id)->get();
+        $user=User::find($id);
+        $roles=Role::all();
+        return view('users.edit',compact('user','roles'));
 
-        return view('properties.edit',compact('property','users'));
     }
 
     /**
@@ -95,13 +87,21 @@ class PropertyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $property=Property::find($id);
-        $property->update(['title'=>$request->title,
-            'lloc'=>$request->lloc,
-            'user_id'=>$request->user_id
-        ]);
-
-        return redirect()->route('properties.index');
+        $user=user::find($id);
+        $exists_email = user::where("email",$request->email)->first();
+        if ($exists_email){
+            $user->update(['name'=>$request->name,
+                'rol_id'=>$request->role,
+                'password'=>bcrypt($request->password)
+            ]);
+        }else{
+            $user->update(['name'=>$request->name,
+                'email'=>$request->email,
+                'rol_id'=>$request->role,
+                'password'=>bcrypt($request->password)
+            ]);
+        }
+        return redirect()->route('users.index');
     }
 
     /**
@@ -112,7 +112,9 @@ class PropertyController extends Controller
      */
     public function destroy($id)
     {
-        //
-        return redirect()->route('properties.index');
+        user::destroy($id);
+        return redirect()->route('users.index');
+
     }
+
 }

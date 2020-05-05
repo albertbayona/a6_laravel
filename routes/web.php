@@ -16,17 +16,22 @@ Auth::routes();
 
 
 Route::get('/', function () {
-    return view('index');
+    return view('home');
 })->name('home');
 
-Route::post('post/{id}', function ($id) {
-    //
-})->middleware('auth', 'role:admin');
-
 Route::get('/home', function () {
-//    return dd($_SESSION);
     return view('home');
-})->name('home.logat');
+});
+
+
+//
+//Route::post('post/{id}', function ($id) {
+//    //
+//})->middleware('auth', 'role:admin');
+
+Route::resource('publications','PublicationController');
 
 Route::resource('properties','PropertyController');
-Route::resource('publications','PublicationController');
+Route::get('properties/{property}/edit', "PropertyController@edit")->middleware('auth', 'role:admin')->name("properties.edit");
+
+Route::resource('users','UserController');

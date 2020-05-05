@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $request->user()->authorizeRoles(['user', 'admin']);//busca  que tenga uno de los 2 roles
-        return view('home');
+        return view('app');
     }
     /*
         public function someAdminStuff(Request $request)

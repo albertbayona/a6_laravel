@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('content')
     <div class="col-lg-12">
@@ -15,11 +15,11 @@
             <input type="text" name="lloc" value="{{$property->lloc}}" class="form form-control">
             Owner
             <br/>
-            <input class="list-group " list="user_id" name="user_id" value="{{$property->user_id}}">
+            <p>Propietari actual: {{$property->user->email}}</p>
+            <select class="list-group " list="user_id" name="user_id" value="{{$property->user_id}}">
+            <option value="{{$property->user_id}}">DEFAULT</option>
             @foreach($users as $user)
-                <datalist id="user_id">
                     <option value="{{$user->id}}">{{$user->email}}</option>
-                </datalist>
             @endforeach
             <br/>
             <input type="submit" class="btn btn-primary" value="Save">

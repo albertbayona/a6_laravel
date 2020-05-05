@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','rol_id' //En un principio no iba dejar poner el rol id  pero como solol dejamos que lo ponga un admin no hay problema
     ];
 
     /**

@@ -14,7 +14,7 @@ use Illuminate\Database\Query\Builder;
 
 class Publication extends Model
 {
-    protected $table='propietats';
+    protected $table = 'publicacions';
     protected $fillable=['titol','disponibilitat','apartment_id'];
 
     protected $primaryKey = 'id';//por defecto coge ID y que es un numero autoincremental
