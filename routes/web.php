@@ -28,6 +28,6 @@ Route::get('/home', 'HomeController@index');
 Route::resource('publications','PublicationController');
 
 Route::resource('properties','PropertyController');
-Route::get('properties/{property}/edit', "PropertyController@edit")->middleware('auth', 'role:admin')->name("properties.edit");
+//Route::get('properties/{property}/edit', "PropertyController@edit")->middleware('auth', 'role:admin')->name("properties.edit");
 
 Route::resource('users','UserController')->middleware('auth', 'role:admin');

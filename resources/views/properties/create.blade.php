@@ -4,7 +4,7 @@
     <div class="col-lg-12">
 
         <h1 class="my-4">Property create</h1>
-        <form action="{{route('properties.store')}}" method="POST">
+        <form action="{{route('properties.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
             Title
@@ -16,6 +16,8 @@
             <br/>
             Metres quadrats
             <input type="number" name="metres2" value="" class="form form-control">
+            <br/>
+            <input type="file" name="photo" >
             <br/>
             <input type="submit" class="btn btn-primary" value="Save">
             <br/>

@@ -58,7 +58,8 @@ class PublicationController extends Controller
      */
     public function show($id)
     {
-        return view('publications.show');
+        $publication = Publication::find($id);
+        return view('publications.show',compact('publication'));
     }
 
     /**

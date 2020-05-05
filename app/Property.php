@@ -18,7 +18,7 @@ class Property extends Model
 
 
     protected $fillable = [
-        'title', 'lloc', 'metres2','user_id'
+        'title', 'lloc', 'metres2','user_id','image_route'
     ];
     public function user(){
         return $this->belongsTo('App\User',"user_id");

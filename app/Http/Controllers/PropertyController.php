@@ -51,11 +51,15 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $path="";
+        if($request->file('photo')){
+            $path=$request->file('photo')->store('photos','public');
+        }
         Property::create(['title'=>$request->title,
             'lloc'=>$request->lloc,
             'metres2'=>$request->metres2,
-            'user_id'=>auth::user()->id
+            'user_id'=>auth::user()->id,
+            'image_route'=>$path
         ]);
 
         return redirect()->route('properties.index');
@@ -95,11 +99,28 @@ class PropertyController extends Controller
      */
     public function update(Request $request, $id)
     {
+//        dd($request);
+        if($request->file('photo')){
+            $path=$request->file('photo')->store('photos','public');
+        }
+
+        $user_id = auth::user()->id;
+        if(auth::user()->hasAnyRole("admin")){
+            $user_id = $request->user_id;
+        }
         $property=Property::find($id);
-        $property->update(['title'=>$request->title,
-            'lloc'=>$request->lloc,
-            'user_id'=>$request->user_id
-        ]);
+        if(isset($path)){
+            $property->update(['title'=>$request->title,
+                'lloc'=>$request->lloc,
+                'user_id'=>$user_id,
+                'image_route'=>$path
+            ]);
+        }else{
+            $property->update(['title'=>$request->title,
+                'lloc'=>$request->lloc,
+                'user_id'=>$user_id
+            ]);
+        }
 
         return redirect()->route('properties.index');
     }
